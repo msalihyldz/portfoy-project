@@ -30,7 +30,7 @@ export class AuthenticationService {
     }
 
     async login(email: string, password: string) {
-        const userDoc = await this.afs.collection('admins').ref.where('email', '==', email).get();
+        const userDoc = await this.afs.collection('users').ref.where('email', '==', email).get();
         if (userDoc.docs.length === 0) {
             throw new Error('Lütfen bilgilerinizi kontrol edin.');
         }
@@ -39,6 +39,28 @@ export class AuthenticationService {
                 this.subscribeUser();
             });
     }
+
+    async signup(user: {email: string, password: string, name: string, surname: string}){
+
+        const currentUser = await this.afAuth.createUserWithEmailAndPassword(
+            user.email, user.password
+          );
+      
+          console.log(currentUser.user.uid);
+      
+          await this.afs
+            .collection('users')
+            .doc(currentUser.user.uid)
+            .set({
+              name: user.name,
+              surname: user.surname,
+              email: user.email,
+              registrationDate: Date.now()
+            });
+      
+          return currentUser.user.uid;
+    }
+
     logout() {
         this.router.navigate(['account/login']);
         return this.afAuth.signOut();

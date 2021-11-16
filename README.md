@@ -25,3 +25,7 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Sources
+
+Bist(Borsa İstanbul) API used in this project to keep data up to date. Check the page for more information [Bist API](https://collectapi.com/tr/api/economy/altin-doviz-ve-borsa-api/currencyToAll).

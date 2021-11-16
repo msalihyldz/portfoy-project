@@ -1,3 +1,27 @@
-<div>
-  <h2>Şeyma seni Çok seviyorum &lt;3</h2>
+<div class="container">
+  <div class="offset-3 col-6">
+    <div class="login-form align-content-center justify-content-center">
+      <h3>Kullanıcı Girişi</h3>
+      <form name="loginForm" [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" formControlName="email" class="form-control" id="email" placeholder="Email giriniz">
+          <small id="emailHelp" class="form-text text-muted">Bilgileriniz gizli kalacaktır.</small>
+
+          <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+            <div *ngIf="f.email.errors.required">Email zorunlu.</div>
+            <div *ngIf="f.email.errors.email">Lütfen geçerli bir email adresi girin.</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="password">Şifre</label>
+          <input type="password" formControlName="password" class="form-control" id="password" placeholder="Şifre">
+          <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+            <div *ngIf="f.password.errors.required">Şifre zorunlu.</div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Giriş Yap</button>
+      </form>
+    </div>
+  </div>
 </div>

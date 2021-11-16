@@ -10,17 +10,23 @@ import {
 } from '@angular/fire/auth-guard';
 
 const redirectUnauthorizedToLogin = () =>
-  redirectUnauthorizedTo(['account/auth/login']);
+  redirectUnauthorizedTo(['account/login']);
 const routes: Routes = [
   {
     path: 'account',
     loadChildren: () =>
       import('./account/account.module').then((m) => m.AccountModule),
   },
-  // tslint:disable-next-line: max-line-length
-  { path: '', 
-  loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule),
-  canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin } },
+  { 
+    path: '', 
+    loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule),
+    canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin } 
+  },
+  {
+    path: '',
+    redirectTo: '',
+    pathMatch: 'full'
+  }
 ];
 
 @NgModule({

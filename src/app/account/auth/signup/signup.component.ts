@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -14,14 +15,19 @@ export class SignupComponent implements OnInit, AfterViewInit {
   error = '';
   loading = false;
 
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router) { }
+  constructor(
+    private formBuilder: FormBuilder, 
+    private route: ActivatedRoute, 
+    private router: Router,
+    private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
 
     this.signupForm = this.formBuilder.group({
-      name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
+      name: ['', Validators.required],
+      surname: ['', Validators.required],
     });
   }
 
@@ -46,9 +52,11 @@ export class SignupComponent implements OnInit, AfterViewInit {
     this.loading = true;
 
     console.log(this.signupForm.value);
+
+    this.authenticationService.signup(this.signupForm.value)
     setTimeout(() => {
       this.loading = false;
-      this.router.navigate(['/account/confirm']);
+      this.router.navigate(['/account/login']);
     }, 1000);
   }
 }

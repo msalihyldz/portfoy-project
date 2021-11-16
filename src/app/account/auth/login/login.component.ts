@@ -19,7 +19,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router,
               private authenticationService: AuthenticationService) { 
-                console.warn("SAAAA");
                }
 
   ngOnInit() {
