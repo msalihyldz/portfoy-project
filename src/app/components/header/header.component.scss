@@ -1,0 +1,27 @@
+@import "/src/styles.scss";
+
+.header {
+  max-height: 20%;
+  width: 100%;
+  margin: 0px;
+}
+
+nav {
+  height: 100%;
+  width: 100%;
+  padding: 1% 2%;
+  background-color: $blue2;
+}
+
+.navbar-brand {
+  width: 10%;
+  display: block;
+}
+
+.logo {
+  max-width: 100%;
+}
+
+.nav-item {
+  font-size: 18px;
+}
