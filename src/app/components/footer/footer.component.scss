@@ -1,0 +1,22 @@
+@import "/src/styles.scss";
+
+.footer {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  padding: 1%;
+  text-align: center;
+  background-color: $blue2;
+  ul {
+    list-style-type: none;
+    a {
+      color: $purple1;
+      padding: 0% 3%;
+      font-size: 22px;
+    }
+  }
+}
+
+.col-12 {
+  text-align: center;
+}
