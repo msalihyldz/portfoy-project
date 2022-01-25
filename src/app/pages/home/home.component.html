@@ -1,5 +1,58 @@
 <app-header></app-header>
 <div>
-    This is a Home page
+    <div class="container text-center mt-5 pb-custom">
+        <div class="row">
+            <div class="col-6 offset-3">
+                <div *ngIf=" assets.length !== 0">
+                  <div class="form-group">
+                    <h5 for="from"><b>From</b></h5>
+                    <select class="form-select" id="from" aria-label="Default select example" (change)="from = $event.target.value">
+                        <option disabled>From</option>
+                        <option *ngFor="let item of assets" value="{{ item }}" >{{ item }}</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <h5 for="to"><b>To</b></h5>
+                    <select class="form-select" id="to" aria-label="Default select example" (change)="to = $event.target.value ">
+                        <option disabled>From</option>
+                        <option *ngFor="let item of assets" value="{{ item }}">{{ item }}</option>
+                    </select>
+                  </div>
+                  <div class="mt-3">
+                    <h5> Selected parameter is : {{ from === undefined || to === undefined ? "" : (from + to) }} </h5>
+                  </div>
+                  <button (click)="checkSymbol((from+to))" class="btn btn-primary mt-3" [disabled]="checking || from === undefined || to === undefined || to === from">{{ checking ? "Checking..." : "Check Symbol"}}</button>
+                  <div class="form-group mt-3">
+                    <label *ngIf="symbolError" class="text-danger">Selected symbol is not proper please select another pair.</label>
+                  </div>
+                </div>
+                <div *ngIf="assets.length !== 0 && properSymbol" class="mt-5">
+                  <div class="form-group">
+                    <label for="currentValue"><b>Current Value</b></label>
+                    <input type="text" class="form-control" id="currentValue" disabled value="{{symbolAvg}}">
+                  </div>
+                    <div class="form-group">
+                      <label for="targetValue"><b>Please enter a target value to be informed.</b></label>
+                      <input type="text" class="form-control" id="targetValue" placeholder="Target Value" (change)="targetValue = $event.target.value">
+                      <small [hidden]="!targetError" class="text-danger">Please enter a valid target value</small>
+                    </div>
+                    <div class="form-group">
+                      <label for="userEmail"><b>Please enter your email address.</b></label>
+                      <input type="email" class="form-control" id="userEmail" placeholder="Email" (change)="userEmail = $event.target.value">
+                      <small [hidden]="!mailError" class="text-danger">Please enter a valid mail address</small>
+                    </div>
+                    <a (click)="setAlarm()" class="btn btn-primary mt-3" >Set Alarm</a>
+                </div>
+                <div [hidden]="closeAlert" class="alert alert-success mt-4" role="alert">
+                  The alarm has been set, you will get an information email when the target value is reached!
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <div class="d-flex justify-content-center" *ngIf="assets.length === 0">
+                  <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>  
 </div>
-<app-footer></app-footer>

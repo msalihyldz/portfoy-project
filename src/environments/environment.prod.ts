@@ -11,3 +11,5 @@ export const firebaseConfig = {
   appId: "1:394927906878:web:cefa21edba3b9b7777b16f",
   measurementId: "G-GLRYT01Z7X"
 };
+
+export const tradeLimit = 100
